@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import styles from './empty_page.css';
-// import Canvas from '../canvas';
-// import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
-
+// import Draggable from 'react-draggable';
+import { Stage, Layer, Text, Image } from 'react-konva';
+import Canvas from '../canvas'
 
 export default class Empty_page extends Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
-        this.onClickDownload = this.onClickDownload.bind(this);
-        this.addImage_button = this.addImage_button.bind(this);
-        this.addBackground_button = this.addBackground_button.bind(this);
         this.state = {
             bold_obj: '',
             text_title: "Overlay text"
         };
+
     }
 
 
@@ -31,101 +27,56 @@ export default class Empty_page extends Component {
         delete link.click;
     }
     componentDidMount() {
-        this.canvas = this.myRef.current
-        this.ctx = this.canvas.getContext("2d")
         // this.canvas = this.myRef.current
         // this.ctx = this.canvas.getContext("2d")
-        // this.text_title = "Overlay text";
-        // this.img = new Image();
-        // this.img.onload = function () {
-
-        // };
-        // this.img.src = 'https://unsplash.it/400/400/?random';
-
-        // const img = this.refs.image
-        // img.onload = () => {
-        //     ctx.drawImage(img, 100, 0)
-        //     ctx.font = "40px Courier"
-        // }
-        // ctx.font = "40px Courier"
-        // ctx.fillText("hello world", 210, 75)
-    }
-    DrawOverlay() {
-        this.ctx.drawImage(this.img, 0, 0);
-        this.ctx.fillStyle = 'rgba(30, 144, 255, 0.4)';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-    DrawText() {
-        this.ctx.fillStyle = "white";
-        this.ctx.textBaseline = 'middle';
-        this.ctx.font = "50px 'Montserrat'";
-        this.ctx.fillText(this.text_title, 50, 50);
-    }
-    DynamicText() {
-        let canvas_add_text = this.myRef.current
-        let ctx = canvas_add_text.getContext("2d")
-        document.getElementById('title').addEventListener('keyup', function () {
-            console.log(" clear rect " + ctx)
-            ctx.clearRect(0, 0, canvas_add_text.width, canvas_add_text.height);
-            this.DrawOverlay();
-            this.DrawText();
-            this.text_title = this.value;
-            ctx.fillText(this.text_title, 50, 50);
-        });
     }
     addText = () => {
-        // this.img.onload = function () {
+        // let canvas_add_text = this.myRef.current
+        // let ctx = canvas_add_text.getContext("2d")
+        // document.getElementById('title').style.display = "block"
+        // document.getElementById('bold_button').style.display = "block"
+        // document.getElementById('text_color_input').style.display = "block"
+        // document.getElementById('title').addEventListener('keyup', function () {
+        //     var stringTitle = document.getElementById('title').value;
+        //     document.getElementById('myLabel').value = stringTitle;
+        //     console.log(stringTitle);
+        //     ctx.fillStyle = '#ffffff';
+        //     ctx.fillRect(0, 0, (canvas_add_text.width) / 2, (canvas_add_text.height) / 2);
+        //     ctx.fillStyle = '#000000';
+        //     if (document.getElementById('bold_input').value == 'bold')
+        //         ctx.font = 'bold 30px Georgia, serif'
+        //     else
+        //         ctx.font = '30px Georgia, serif'
+        //     ctx.fillStyle = document.getElementById('text_color_input').value;
+        //     ctx.textBaseline = 'middle';
+        //     ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
+        // });
+        // document.getElementById('bold_button').addEventListener('click', function () {
+        //     ctx.fillStyle = '#ffffff';
+        //     ctx.fillRect(0, 0, (canvas_add_text.width) / 2, (canvas_add_text.height) / 2);
+        //     ctx.fillStyle = '#000000';
+        //     ctx.fillStyle = document.getElementById('text_color_input').value;
 
-        // };
-        // this.DrawOverlay();
-        // this.DrawText();
-        // this.DynamicText();
-        // this.img.src = 'https://unsplash.it/400/400/?random';
-        let canvas_add_text = this.myRef.current
-        let ctx = canvas_add_text.getContext("2d")
-        document.getElementById('title').style.display = "block"
-        document.getElementById('bold_button').style.display = "block"
-        document.getElementById('text_color_input').style.display = "block"
-        document.getElementById('title').addEventListener('keyup', function () {
-            var stringTitle = document.getElementById('title').value;
-            console.log(stringTitle);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, (canvas_add_text.width) / 2, (canvas_add_text.height) / 2);
-            ctx.fillStyle = '#000000';
-            if (document.getElementById('bold_input').value == 'bold')
-                ctx.font = 'bold 30px Georgia, serif'
-            else
-                ctx.font = '30px Georgia, serif'
-            ctx.fillStyle = document.getElementById('text_color_input').value;
-            ctx.textBaseline = 'middle';
-            ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
-        });
-        document.getElementById('bold_button').addEventListener('click', function () {
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, (canvas_add_text.width) / 2, (canvas_add_text.height) / 2);
-            ctx.fillStyle = '#000000';
-            ctx.fillStyle = document.getElementById('text_color_input').value;
-
-            console.log("on bold function")
-            ctx.font = 'bold 30px Georgia, serif'
-            var stringTitle = document.getElementById('title').value;
-            ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
-            document.getElementById('bold_input').value = 'bold'
-            document.getElementById('bold_button').value = 'bold'
-        });
-        document.getElementById('text_color_input').addEventListener('change', function () {
-            console.log("on change color")
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, (canvas_add_text.width) / 2, (canvas_add_text.height) / 2);
-            ctx.fillStyle = '#000000';
-            if (document.getElementById('bold_input').value == 'bold')
-                ctx.font = 'bold 30px Georgia, serif'
-            else
-                ctx.font = '30px Georgia, serif'
-            ctx.fillStyle = document.getElementById('text_color_input').value;
-            var stringTitle = document.getElementById('title').value;
-            ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
-        });
+        //     console.log("on bold function")
+        //     ctx.font = 'bold 30px Georgia, serif'
+        //     var stringTitle = document.getElementById('title').value;
+        //     ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
+        //     document.getElementById('bold_input').value = 'bold'
+        //     document.getElementById('bold_button').value = 'bold'
+        // });
+        // document.getElementById('text_color_input').addEventListener('change', function () {
+        //     console.log("on change color")
+        //     ctx.fillStyle = '#ffffff';
+        //     ctx.fillRect(0, 0, (canvas_add_text.width) / 2, (canvas_add_text.height) / 2);
+        //     ctx.fillStyle = '#000000';
+        //     if (document.getElementById('bold_input').value == 'bold')
+        //         ctx.font = 'bold 30px Georgia, serif'
+        //     else
+        //         ctx.font = '30px Georgia, serif'
+        //     ctx.fillStyle = document.getElementById('text_color_input').value;
+        //     var stringTitle = document.getElementById('title').value;
+        //     ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
+        // });
         // document.getElementById('change_background_color').addEventListener('change', function () {
         //     console.log("on change color")
         //     ctx.fillStyle = '#ffffff';
@@ -139,64 +90,65 @@ export default class Empty_page extends Component {
         //     var stringTitle = document.getElementById('title').value;
         //     ctx.fillText(stringTitle, 15, canvas_add_text.height / 4 + 35);
         // });
-        ctx.textBaseline = 'middle';
+        // ctx.textBaseline = 'middle';
     }
     addImage_button = () => {
         console.log("addImage_ button")
-        document.getElementById('add_image_title').style.display = "block"
-        document.getElementById('files').style.display = "block"
-        let canvas_add_image = this.myRef.current
-        let ctx = canvas_add_image.getContext("2d")
-        // if (window.File && window.FileList && window.FileReader) {
-        document.getElementById('files').addEventListener('change', function (ev) {
-            console.log("add image function")
-            if (ev.target.files) {
-                let file = ev.target.files[0];
-                let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = function (e) {
-                    let image = new Image();
-                    image.src = e.target.result;
-                    image.onload = function (ev) {
-                        // var canvas = document.getElementById('canvas');
-                        // canvas_add_image.width = image.width;
-                        // canvas_add_image.height = image.height;
-                        ctx.drawImage(image, 0, 0);
-                        ctx.fillStyle = 'rgba(30, 144, 255, 0.4)';
-                    }
-                }
-            }
-        });
+        // document.getElementById('add_image_title').style.display = "block"
+        // document.getElementById('files').style.display = "block"
+        // let canvas_add_image = this.myRef.current
+        // let ctx = canvas_add_image.getContext("2d")
+        // // if (window.File && window.FileList && window.FileReader) {
+        // document.getElementById('files').addEventListener('change', function (ev) {
+        //     console.log("add image function")
+        //     if (ev.target.files) {
+        //         let file = ev.target.files[0];
+        //         let reader = new FileReader();
+        //         reader.readAsDataURL(file);
+        //         reader.onloadend = function (e) {
+        //             let image = new Image();
+        //             image.src = e.target.result;
+        //             image.onload = function (ev) {
+        //                 // var canvas = document.getElementById('canvas');
+        //                 // canvas_add_image.width = image.width;
+        //                 // canvas_add_image.height = image.height;
+        //                 ctx.drawImage(image, 0, 0);
+        //                 ctx.fillStyle = 'rgba(30, 144, 255, 0.4)';
+        //             }
+        //         }
+        //     }
+        // });
     }
     addBackground_button = () => {
-        document.getElementById('add_image_title').style.display = "block"
-        document.getElementById('files').style.display = "block"
-        let canvas_add_image = this.myRef.current
-        let ctx = canvas_add_image.getContext("2d")
-        document.getElementById('files').addEventListener('change', function (ev) {
-            console.log("add image function")
-            if (ev.target.files) {
-                let file = ev.target.files[0];
-                let reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = function (e) {
-                    let image = new Image();
-                    image.src = e.target.result;
-                    image.onload = function (ev) {
-                        canvas_add_image.width = image.width;
-                        canvas_add_image.height = image.height;
-                        ctx.drawImage(image, 0, 0);
-                    }
-                }
-            }
-        });
+        // document.getElementById('add_image_title').style.display = "block"
+        // document.getElementById('files').style.display = "block"
+        // let canvas_add_image = this.myRef.current
+        // let ctx = canvas_add_image.getContext("2d")
+        // document.getElementById('files').addEventListener('change', function (ev) {
+        //     console.log("add image function")
+        //     if (ev.target.files) {
+        //         let file = ev.target.files[0];
+        //         let reader = new FileReader();
+        //         reader.readAsDataURL(file);
+        //         reader.onloadend = function (e) {
+        //             let image = new Image();
+        //             image.src = e.target.result;
+        //             image.onload = function (ev) {
+        //                 canvas_add_image.width = image.width;
+        //                 canvas_add_image.height = image.height;
+        //                 ctx.drawImage(image, 0, 0);
+        //             }
+        //         }
+        //     }
+        // });
     }
 
 
     onClickDownload = (e) => {
-        let canvas_to_data = this.myRef.current
-        this.downloadURI(canvas_to_data.toDataURL(), 'my_banner.png');
+        //     let canvas_to_data = this.myRef.current
+        //     this.downloadURI(canvas_to_data.toDataURL(), 'my_banner.png');
     }
+
     render() {
         return (
             <div className="d-flex flex-column align-item-center align-content-center justify-content-between">
@@ -227,13 +179,13 @@ export default class Empty_page extends Component {
                     </div> */}
                     <div className="d-flex justify-content-between flex-column">
                         <nav className="navbar navbar-expand-lg">
-                            <div className="collpase navbar-collpase">
+                            {/* <div className="collpase navbar-collpase">
                                 <ul className="navbar-nav mr-auto">
                                     <li className="navbar-item">
                                         <button variant="primary" onClick={this.onClickDownload} className="nav-link btn btn-primary">Download</button>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> */}
                             <div className="collpase navbar-collpase">
                                 <ul className="navbar-nav mr-auto">
                                     <li className="navbar-item">
@@ -249,6 +201,7 @@ export default class Empty_page extends Component {
                                     </li>
                                 </ul>
                             </div>
+
                             <div className="d-flex" style={{ display: "none" }} id="images_div">
                                 <span>
                                     <h5 id="add_image_title" style={{ display: "none" }}>Upload your images</h5>
@@ -257,10 +210,12 @@ export default class Empty_page extends Component {
                             </div>
 
                         </nav >
-                        <input id="title" placeholder="write your title here" style={{ border: "1.5px solid black" }} value={this.state.value} style={{ display: "none" }}></input>
-                        <canvas ref={this.myRef} width={500} height={425} style={{ border: "1px solid #000000" }} />
+                        <input id="title" placeholder="write your title here" style={{ border: "1.5px solid black" }} style={{ display: "none" }}></input>
+                        <Canvas title_input={this.state.text_title} />
+                        {/* <canvas ref={this.myRef} width={500} height={425} style={{ border: "1px solid #000000" }} /> */}
                         {/* <img ref="image" src={require('./img/banner_ad.jpg')} className="hidden" style={{ display: "none" }} /> */}
                         {/* <label>{this.props.title}</label> */}
+                        <input id="myLabel" value={this.state.text_title} style={{ display: "none" }}></input>
                     </div>
                     {/* <Canvas title={this.state.title}/> */}
                 </div>
